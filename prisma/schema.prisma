@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextIndex"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userName String
+  email String @unique 
+  password String @unique
+  isRegistered Boolean
+  isLogIn Boolean
+  isLogout Boolean
+  createdAt DateTime @default(now())
+  deletedAt DateTime
+  updatedAt DateTime
+
+  // @@index([id, email])
+}
+
+
+// https://blog.logrocket.com/how-configure-indexes-prisma/
+// https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#relation-fields
