@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["fullTextIndex"]
@@ -12,21 +9,33 @@ datasource db {
 }
 
 
-model User {
+model BlogUser {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userName String
   email String @unique 
   password String @unique
+  confirmPassword String @unique
+  salt String @unique
+  userDetails UserDetails
+
+  @@index([id, email])
+}
+
+type UserDetails {
+  firstName String
+  lastName String
+  fullName String
+  role String @default("User")
+  isAdmin Boolean @default(false)
   isRegistered Boolean
   isLogIn Boolean
-  isLogout Boolean
+  isLogout Boolean 
   createdAt DateTime @default(now())
-  deletedAt DateTime
+  deletedAt DateTime 
   updatedAt DateTime
-
-  // @@index([id, email])
 }
 
 
-// https://blog.logrocket.com/how-configure-indexes-prisma/
-// https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#relation-fields
+model Post {
+  id String @id @map("_id")
+}

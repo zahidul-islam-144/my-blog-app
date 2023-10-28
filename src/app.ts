@@ -5,6 +5,10 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import { errorMiddleWare } from './middlewares/errorMiddlewares';
 
+// all routes
+import authRouter from './routes/authRoute';
+
+
 const app:Application = express();
 
 // middlewares
@@ -15,15 +19,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 
-/*
---------------  routes --------------
-*/
-
-// import route from routes
-// const authRouter = require('../api/routes/authRoutes');
-
 // register route in the app
-// app.use('/auth', authRouter);
+app.use('/auth', authRouter);
 
 
 
@@ -34,4 +31,4 @@ app.use(errorMiddleWare);
 
 
 // app exported
-module.exports =  app ;
+export default app ;

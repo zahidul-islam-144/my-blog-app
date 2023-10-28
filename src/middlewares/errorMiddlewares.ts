@@ -1,4 +1,6 @@
-export const errorMiddleWare = (err:any, req:any, res:any, next:any) => {
+import { Request, Response, Application, NextFunction, ErrorRequestHandler } from 'express';
+
+export const errorMiddleWare:ErrorRequestHandler = (err:any, req:Request, res:Response, next:NextFunction) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error!";
   

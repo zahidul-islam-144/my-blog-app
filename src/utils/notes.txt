@@ -1,0 +1,44 @@
+typeScript OOP:
+https://www.typescriptlang.org/docs/handbook/classes.html
+
+
+https://blog.logrocket.com/how-configure-indexes-prisma/
+https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#relation-fields
+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
+https://www.youtube.com/watch?v=IiqhMNPWGEs
+
+
+
+//seed.js
+import { parseArgs } from 'node:util'
+
+const options = {
+  environment: { type: 'string' },
+}
+
+async function main() {
+  const {
+    values: { environment },
+  } = parseArgs({ options })
+
+  switch (environment) {
+    case 'development':
+      /** data for your development */
+      break
+    case 'test':
+      /** data for your test environment */
+      break
+    default:
+      break
+  }
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
